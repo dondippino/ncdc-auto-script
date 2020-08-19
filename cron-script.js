@@ -2,6 +2,7 @@ const { setUpDataDirs, setUpReadLine, getDatafromURL, extractTableHTMLtoObject, 
 const CURRENT_DIR = './archive/current';
 const DATA_DIR = './archive/data';
 const MUTATIONS_DIR = './archive/mutations';
+var cron = require('node-cron');
 
 cron.schedule('45 23 * * *', () => {
     (async () => {
@@ -12,5 +13,6 @@ cron.schedule('45 23 * * *', () => {
         let extractedObject = await extractTableHTMLtoObject($, identifier);
         await saveToArchive(extractedObject, url, DATA_DIR);
         generateMutation(extractedObject, url, CURRENT_DIR, MUTATIONS_DIR).then((h) => {
-    });
-})();
+        });
+    })();
+});
