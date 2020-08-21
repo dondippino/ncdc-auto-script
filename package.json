@@ -8,7 +8,8 @@
     "test": "jest --detectOpenHandles --runInBand",
     "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "start": "node scrapers.js",
-    "start:cron": "node cron-script.js"
+    "start:cron": "node cron-script.js",
+    "check-mutation": "node check-mutation.js"
   },
   "keywords": [],
   "author": "Olabosinde Oladipo <olabosindeoladipo@gmail.com>",

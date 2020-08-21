@@ -419,3 +419,32 @@ exports.publishToQueue = (rmq, queue, msg)=> {
         });
     }).catch(console.warn);
 }
+
+/** 
+  * @desc This function checks to see if there is a mutaiton
+  * @author Olabosinde Oladipo Olabosindeoladipo@gmail.com
+  * @param mainObject: Converted HTML table to object
+  * @param url
+  * @requires fs
+  * @requires hash
+  * @returns Promise
+*/
+
+exports.checkMutation = (mainObject, url, DATA_DIR) => {
+
+    //  Create a unique means of identification for the extracted data by hashing the object
+    var hashedFile = path.join(`${DATA_DIR}/`, exports.extractHostname(url) + '_' + hash(mainObject));
+    subject.next('Checking the archive ...');
+
+    return new Promise((resolve) => {
+        // Check if this file exists in the archives data directory
+        fs.promises.access(hashedFile).then((err) => { // if Yes, Don't save
+            subject.next('This report already exists in the archive ...');
+            resolve("");
+        }).catch((err) => { // if No, Save it
+            subject.next('This report does not exist in the archive ...');
+        }).finally(()=>{
+            subject.next(`From Web: ${hashedFile}`);
+        })
+    });
+}
