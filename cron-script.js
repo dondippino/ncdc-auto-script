@@ -4,7 +4,8 @@ const DATA_DIR = './archive/data';
 const MUTATIONS_DIR = './archive/mutations';
 var cron = require('node-cron');
 
-cron.schedule('57 23 * * *', () => {
+// cron.schedule('57 23 * * *', () => {
+cron.schedule('0 */2 * * *', () => {    
     (async () => {
         await setUpDataDirs(CURRENT_DIR, DATA_DIR, MUTATIONS_DIR);
         let url = await requestForUrl();

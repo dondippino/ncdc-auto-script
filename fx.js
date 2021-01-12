@@ -353,6 +353,12 @@ exports.generateMutation = (mainObject, url, CURRENT_DIR, MUTATIONS_DIR) => {
 
                 // Add date to it
                 var d = new Date();
+
+                // To catch late mutations in the previous day
+                if(  d.getHours() < 21 ){
+                    d = d.setDate(d.getDate() - 1);
+                }
+
                 var d_str = (d.getDate() <= 9 ? ('0' + (d.getDate())) : (d.getDate())) + '/' + ((d.getMonth() + 1) <= 9 ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1)) + '/' + d.getFullYear();
                 var mutation_copy = Object.assign({}, mutation);
                 mutation_copy['date_of_report'] = d_str;
