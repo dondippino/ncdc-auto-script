@@ -356,7 +356,7 @@ exports.generateMutation = (mainObject, url, CURRENT_DIR, MUTATIONS_DIR) => {
 
                 // To catch late mutations in the previous day
                 if(  d.getHours() < 21 ){
-                    d = d.setDate(d.getDate() - 1);
+                    d.setDate(d.getDate() - 1);
                 }
 
                 var d_str = (d.getDate() <= 9 ? ('0' + (d.getDate())) : (d.getDate())) + '/' + ((d.getMonth() + 1) <= 9 ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1)) + '/' + d.getFullYear();
